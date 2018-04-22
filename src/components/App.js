@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { database } from '../firebase';
 import _ from 'lodash';
 import {connect}  from 'react-redux';
-import {getNote, saveNote} from '../actions/notesAction'
+import {getNote, saveNote, deleteNote} from '../actions/notesAction'
 
 
 class App extends Component {
   state = {
     title: "",
     body: "",
-    notes:{}
+    
   }
 
   //lifecycle
@@ -42,11 +41,12 @@ class App extends Component {
 
   //render notes
  renderNotes=()=>{
-  return _.map(this.state.notes,(note,key)=>{
+  return _.map(this.props.notes,(note,key)=>{
      return(
        <div key="key">
       <h2>{note.title}</h2>
       <p>{note.body}</p>
+      <button onClick={()=>{this.props.deleteNote(key)}}className="btn btn-danger btn-xs">Delete</button>
        </div>
      )
   });
@@ -104,4 +104,4 @@ mapDispatchProps(){
 
 }
 */
-export default connect(mapStateToProps,{getNote,saveNote})(App);
+export default connect(mapStateToProps,{getNote,saveNote,deleteNote})(App);
