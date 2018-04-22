@@ -2,7 +2,7 @@
 import { GET_NOTES } from '../actionTypes'
 import { database } from '../firebase';
 
-export function getNotes() {
+export function getNote() {
     return dispatch => {
         database.on('value', snapshot => {
             dispatch({

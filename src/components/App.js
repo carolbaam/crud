@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { database } from '../firebase';
 import _ from 'lodash';
 import {connect}  from 'react-redux';
-import {getNotes, saveNotes} from '../actions/notesAction'
+import {getNote, saveNote} from '../actions/notesAction'
 
 
 class App extends Component {
@@ -14,11 +14,7 @@ class App extends Component {
 
   //lifecycle
  componentDidMount(){
-database.on('value',(snapshot)=>{
-  this.setState ({
-    notes:snapshot.val()
-  })
-})
+   this.props.getNote()
   }
 
   //handleChenge
@@ -36,7 +32,7 @@ database.on('value',(snapshot)=>{
   title: this.state.title,
   body: this.state.body
     }
-  database.push(note)
+  this.props.saveNote(note)
   this.setState({
     title:"",
     body:"",
@@ -93,4 +89,19 @@ database.on('value',(snapshot)=>{
   }
 }
 
-export default connect(mapStateToProps,{getNotes,saveNotes})(App);
+ function mapStateToProps(state, ownProps){
+  return{
+    notes: state.notes
+  }
+}
+/*
+
+aquí podrías poner
+{getNotes,saveNotes} aunque es más facil de leer si
+no ponemos esta funcion y pasamos estas propiedades o acciones
+como objetos en el mapStateToProps
+mapDispatchProps(){
+
+}
+*/
+export default connect(mapStateToProps,{getNote,saveNote})(App);
