@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { database } from '../firebase';
 import _ from 'lodash';
+import {connect}  from 'react-redux';
+import {getNotes, saveNotes} from '../actions/notesAction'
 
 
 class App extends Component {
@@ -91,4 +93,4 @@ database.on('value',(snapshot)=>{
   }
 }
 
-export default App;
+export default connect(mapStateToProps,{getNotes,saveNotes})(App);
