@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {googleLogin, twitterLogin} from '../actions/userAction'
 
 class Login extends React.Component {
     render() {
@@ -11,13 +13,13 @@ class Login extends React.Component {
                     </div>
 
                     <div className="col-sm-6">
-                        <button className="btn btn-danger btn-lg">
+                        <button onClick={this.props.googleLogin}className="btn btn-danger btn-lg">
                             Login with Google
                        </button>
                     </div>
                     <div className="col-sm-6">
-                        <button className="btn btn-success btn-lg">
-                            Login with Feacbook
+                        <button onClick={this.props.twitterLogin}className="btn btn-success btn-lg">
+                            Login with Twitter
                        </button>
 
                     </div>
@@ -28,4 +30,5 @@ class Login extends React.Component {
 }
 
 
-export default Login;
+
+export default connect(null,{googleLogin, twitterLogin})(Login);
