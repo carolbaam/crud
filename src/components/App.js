@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {connect}  from 'react-redux';
 import {getNote, saveNote, deleteNote} from '../actions/notesAction'
 import NoteCard from './noteCard'
-
+import {getUser} from '../actions/userAction'
 class App extends Component {
   state = {
     title: "",
@@ -13,7 +13,8 @@ class App extends Component {
 
   //lifecycle
  componentDidMount(){
-   this.props.getNote()
+   this.props.getNote();
+   this.props.getUser();
   }
 
   //handleChenge
@@ -93,7 +94,8 @@ class App extends Component {
 
  function mapStateToProps(state, ownProps){
   return{
-    notes: state.notes
+    notes: state.notes,
+    user:state.user
   }
 }
 /*
@@ -106,4 +108,4 @@ mapDispatchProps(){
 
 }
 */
-export default connect(mapStateToProps,{getNote,saveNote,deleteNote})(App);
+export default connect(mapStateToProps,{getNote,saveNote,deleteNote, getUser})(App);

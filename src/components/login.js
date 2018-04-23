@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {googleLogin, twitterLogin} from '../actions/userAction'
 
 class Login extends React.Component {
+    
     render() {
         return (
             <div className="container-fluid">
